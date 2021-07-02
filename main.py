@@ -1,8 +1,8 @@
-from game.board import Board
+from game.eightNumber import EightNumber
 
 def main():
-    board = Board(3)
-    print(board)
+    eightNumber = EightNumber()
+    print(eightNumber)
 
 if __name__ == "__main__":
     main()
