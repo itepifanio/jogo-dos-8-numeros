@@ -1,3 +1,4 @@
+import copy
 from .board import Board
 from random import choice
 
@@ -57,17 +58,14 @@ class EightNumberBoard:
             raise Exception("Cant go bottom")
 
     def canMoveTop(self, i, j):
-        try:
-            return self.board.matrix[i-1][j] == None
-        except:
-            False
+        return i != 0 and j not in [0,1,2]
 
-    def top(self, i, j):
-        if self.canMoveTop(i, j):
-            self.board.matrix[i-1][j] = self.board.matrix[i][j]
-            self.board.matrix[i][j] = None
-        else:
-            raise Exception("Cant go bottom")
+    def top(self, node, i, j):
+        upNode = copy.deepcopy(node)
+        upNode[i][j] = upNode[i][j]
+        upNode[i][j] = None
+        
+        return upNode
     
     def __str__(self):
         return self.board.__str__()
