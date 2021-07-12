@@ -8,8 +8,6 @@ def printNode(node):
     print(node[2][0],node[2][1],node[2][2])
     global nodeNumber
     print('Node:', nodeNumber)
-    print('Depth:', len(node[9:]))
-    #print('Moves:', node[9:])
     print('------')
     nodeNumber += 1
 
@@ -36,7 +34,7 @@ if __name__ == '__main__':
     printNode(startNode)
     t0 = time.time()
 
-    time.sleep(2)
+    #time.sleep(2)
 
     while (not found and not queue.empty()):
         currentNode = queue.get()

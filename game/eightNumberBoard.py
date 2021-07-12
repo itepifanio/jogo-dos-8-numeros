@@ -6,66 +6,61 @@ class EightNumberBoard:
     def __init__(self):
         self.size = 3
         self.board = Board(self.size)
-        queue = list(range(0,9))
+        numbers = list(range(0,9))
         
+        randomMatrix = []
         for i in range(self.size):
+            randomMatrix.append([])
             for j in range(self.size):
-                value = choice(queue)
-                queue.remove(value)
+                number = choice(numbers)
+                numbers.remove(number)
                 
-                self.board.update(i,j, value if value != 0 else None)
+                randomMatrix[i].append(number if number != 0 else None)
+    
+        self.board.matrix = randomMatrix
 
     def getBoard(self):
-        return self.board
+        return self.board.matrix
 
-    def canMoveLeft(self, i, j):
-        try:
-            return self.board.matrix[i][j-1] == None
-        except:
-            return False
+    def canMoveLeft(self, pos):
+        return pos != [0,3] and pos != [1,0] and pos != [2,0]
 
-    def left(self, i, j):
-        if self.canMoveLeft(i, j):
-            self.board.matrix[i][j-1] = self.board.matrix[i][j]
-            self.board.matrix[i][j] = None
-        else:
-            raise Exception("Cant go left")
+    def canMoveRight(self, pos):
+        return pos != [0,2] and pos != [1,2] and pos != [2,2]
 
-    def canMoveRight(self, i, j):
-        try:
-            return self.board.matrix[i][j+1] == None
-        except:
-            return False
+    def canMoveBottom(self, pos):
+        return pos !=[2,0] and pos !=[2,1] and pos != [2,2]
 
-    def right(self, i, j):
-        if self.canMoveRight(i, j):
-            self.board.matrix[i][j+1] = self.board.matrix[i][j]
-            self.board.matrix[i][j] = None
-        else:
-            raise Exception("Cant go right")
-
-    def canMoveBottom(self, i, j):
-        try:
-            return self.board.matrix[i+1][j] == None
-        except:
-            return False
-
-    def bottom(self, i, j):
-        if self.canMoveBottom(i, j):
-            self.board.matrix[i+1][j] = self.board.matrix[i][j]
-            self.board.matrix[i][j] = None
-        else:
-            raise Exception("Cant go bottom")
-
-    def canMoveTop(self, i, j):
-        return i != 0 and j not in [0,1,2]
+    def canMoveTop(self, pos):
+        return pos != [0, 0] and pos != [0,1] and pos != [0,2]
 
     def top(self, node, i, j):
         upNode = copy.deepcopy(node)
-        upNode[i][j] = upNode[i][j]
-        upNode[i][j] = None
+        upNode[i][j] = upNode[i-1][j]
+        upNode[i-1][j] = None
         
         return upNode
+
+    def right(self, node, i, j):
+        rightNode = copy.deepcopy(node)
+        rightNode[i][j] = rightNode[i][j+1]
+        rightNode[i][j+1] = None
+
+        return rightNode
+
+    def left(self, node, i, j):
+        leftNode = copy.deepcopy(node)
+        leftNode[i][j] = leftNode[i][j-1]
+        leftNode[i][j-1] = None
+
+        return leftNode
+    
+    def bottom(self, node, i, j):
+        downNode = copy.deepcopy(node)
+        downNode[i][j] = downNode[i+1][j]
+        downNode[i+1][j] = None
+
+        return downNode
     
     def __str__(self):
         return self.board.__str__()
