@@ -9,8 +9,6 @@ def printNode(node):
     print(node[2][0],node[2][1],node[2][2])
     global nodeNumber
     print('Node:', nodeNumber)
-    print('Depth:', len(node[9:]))
-    #print('Moves:', node[9:])
     print('------')
     nodeNumber += 1
 
