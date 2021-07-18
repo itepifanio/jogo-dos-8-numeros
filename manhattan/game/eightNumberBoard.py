@@ -2,11 +2,13 @@ import copy
 from .board import Board
 from random import choice
 
+# This class is different because the python 
+# priority queue dont work well with None value
 class EightNumberBoard:
     def __init__(self):
         self.size = 3
         self.board = Board(self.size)
-        """
+
         numbers = list(range(0,9))
         
         randomMatrix = []
@@ -17,8 +19,8 @@ class EightNumberBoard:
                 numbers.remove(number)
                 
                 randomMatrix[i].append(number)
-        """
-        self.board.matrix = [[1,5,4], [3,7,2], [6,8,0]]
+
+        self.board.matrix = randomMatrix
 
     def getBoard(self):
         return self.board.matrix
