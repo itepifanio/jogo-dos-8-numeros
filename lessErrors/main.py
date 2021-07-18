@@ -1,29 +1,28 @@
 from game.eightNumberBoard import EightNumberBoard
 from heapq import heappush, heappop
 import time
-import itertools
 
 def toZero(a):
     return 0 if a == None else a
 
-def manhattan(a):
+def manhattan(node, finalNode):
+    errors = 0
+    for i in range(len(node)):
+        for j in range(len(node)):
+            if node[i][j] == finalNode[i][j]:
+                errors += 1
+    return errors
     result = 0
 
-    node = list(itertools.chain(*a))
-
-    for current, target in enumerate(node):
-        currentRow = int(current/3)
-        currentColumn = current%3
-        targetRow = int(target/3)
-        targetColumn = target%3
-        result += abs(currentRow-targetRow) + abs(currentColumn-targetColumn)
+    for i in range(len(a)):
+        result += sum(abs(val1-val2) for val1, val2 in zip(a[i],b[i]))
 
     return result
 
 if __name__ == '__main__':
     board = EightNumberBoard()
     
-    finalNode = [[0,1,2], [3,4,5], [6,7,8]]
+    finalNode = [[1,2,3], [8,0,4], [7,6,5]]
     
     priorityQueue = []
     
@@ -36,49 +35,41 @@ if __name__ == '__main__':
     found = False
 
     while (not found and len(priorityQueue) != 0):
-        print(priorityQueue)
         currentNode = heappop(priorityQueue)[1]
-        print(priorityQueue)
 
         blankIndex = [[i, n.index(0)] for i, n in enumerate(currentNode) if 0 in n][0]
         
-        if currentNode == finalNode:
-            print("Daleee")
-            break
-
         index = 0
 
         if board.canMoveTop(blankIndex):
             topNode = board.top(currentNode, blankIndex[0], blankIndex[1])
             found = checkFinal(topNode)
             heappush(
-                priorityQueue, (manhattan(topNode), topNode)
+                priorityQueue, (manhattan(topNode, finalNode), topNode)
             )
 
         if board.canMoveLeft(blankIndex) and found == False:
             leftNode = board.left(currentNode, blankIndex[0], blankIndex[1])
             found = checkFinal(leftNode)
             heappush(
-                priorityQueue, (manhattan(leftNode), leftNode)
+                priorityQueue, (manhattan(leftNode, finalNode), leftNode)
             )
 
         if board.canMoveRight(blankIndex) and found == False:
             rightNode = board.right(currentNode, blankIndex[0], blankIndex[1])
             found = checkFinal(rightNode)
             heappush(
-                priorityQueue, (manhattan(rightNode), rightNode)
+                priorityQueue, (manhattan(rightNode, finalNode), rightNode)
             )
 
         if board.canMoveBottom(blankIndex) and found == False:
             bottomNode = board.bottom(currentNode, blankIndex[0], blankIndex[1])
             found = checkFinal(bottomNode)
             heappush(
-                priorityQueue, (manhattan(bottomNode), bottomNode)
+                priorityQueue, (manhattan(bottomNode, finalNode), bottomNode)
             )
 
-        print("Queue {}".format(len(priorityQueue)))
-
-        #break
+            print("Queue {}".format(len(priorityQueue)))
 
     t1 = time.time()
     print('Time:', t1-t0)
