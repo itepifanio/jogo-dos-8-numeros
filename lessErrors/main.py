@@ -28,24 +28,21 @@ def checkFinal(node, finalNode):
         visitedList.append(node)
     return False
 
-def heuristic(a):
-    result = 0
+def heuristic(node, finalNode):
+    errors = 0
 
-    node = list(itertools.chain(*a))
+    for i in range(len(node)):
+        for j in range(len(node)):
+            if node[i][j] != finalNode[i][j]:
+                errors += 1
 
-    for current, target in enumerate(node):
-        currentRow = int(current/3)
-        currentColumn = current%3
-        targetRow = int(target/3)
-        targetColumn = target%3
-        result += abs(currentRow-targetRow) + abs(currentColumn-targetColumn)
-
-    return result
+    return errors
 
 if __name__ == '__main__':
     board = EightNumberBoard()
     
     startNode = board.getBoard()
+    print(startNode)
     finalNode = [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
     
     found = False
@@ -59,13 +56,11 @@ if __name__ == '__main__':
 
     found = False
 
-    while (not found and len(nodeList) != 0):
+    while not found:
         fList = []
         for node in nodeList:
-            h = heuristic(node)
-            g = len(node)
-            f = g+h
-            heappush(fList, (f, node))
+            h = heuristic(node, finalNode)
+            heappush(fList, (h, node))
 
         currentNode = nodeList.pop(
             nodeList.index(
