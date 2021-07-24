@@ -53,5 +53,5 @@ class Bfs(Game):
 
 
 if __name__ == '__main__':
-    manhanttan = Bfs()
-    manhanttan.run()
+    algorithm = Bfs()
+    algorithm.run()

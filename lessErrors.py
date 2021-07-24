@@ -1,23 +1,17 @@
 from game.game import Game
 from heapq import heappush, heappop
 import time
-import itertools
-import time
 
-class Manhanttan(Game):
-    def heuristic(self, a):
-        result = 0
+class LessErrors(Game):
+    def heuristic(self, node):
+        errors = 0
 
-        node = list(itertools.chain(*a))
+        for i in range(len(node)):
+            for j in range(len(node)):
+                if node[i][j] != self.finalNode[i][j]:
+                    errors += 1
 
-        for current, target in enumerate(node):
-            currentRow = int(current/3)
-            currentColumn = current%3
-            targetRow = int(target/3)
-            targetColumn = target%3
-            result += abs(currentRow-targetRow) + abs(currentColumn-targetColumn)
-
-        return result
+        return errors
 
     def run(self):
         self.nodeList.append(self.startNode)
@@ -65,6 +59,7 @@ class Manhanttan(Game):
 
 
 if __name__ == '__main__':
-    algorithm = Manhanttan()
+    algorithm = LessErrors()
     algorithm.run()
+    
     

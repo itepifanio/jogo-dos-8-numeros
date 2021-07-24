@@ -59,5 +59,5 @@ class Dfs(Game):
 
 
 if __name__ == '__main__':
-    manhanttan = Dfs()
-    manhanttan.run()
+    algorithm = Dfs()
+    algorithm.run()
