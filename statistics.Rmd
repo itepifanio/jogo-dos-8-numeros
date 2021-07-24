@@ -1,0 +1,98 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+bfsTimeExecutions <- c(
+  2346.328840970990,
+  1727.4176590442657,
+  80.9288215637207,
+  0.3394901752471924,
+  157.0929400920868,
+  1992.5260610580444,
+  406.77702713012695,
+  671.686853647232,
+  2504.102796316147,
+  1980.2213008403778,
+  436.39379811286926,
+  418.4068372249603,
+  90.13945198059082,
+  3.4337823390960693,
+  714.9176962375641,
+  594.5173964500427,
+  4776.611823797226,
+  6486.593960046768,
+  2416.2244758605957,
+  329.9194004535675,
+  99.61120462417603,
+  1899.3331665992737,
+  183.664324760437,
+  1634.077236890798,
+  124.98643445968628,
+  1033.1519844532013,
+  3893.117560148239,
+  371.0890076160431,
+  2404.951068162918,
+  574.9458975791931
+)
+
+dfsTimeExecution <- c(
+  2.7871224880218506,
+  2136.169887304306,
+  42.323312759399414,
+  0.3891427516937256,
+  2303.821371078491,
+  22.9642703533172,
+  2819.71511387825,
+  170.54384589195251,
+  127.62078213691711,
+  1220.3461730480194,
+  3352.9152183532715,
+  619.6819317340851,
+  426.06722831726074,
+  814.8609900474548,
+  589.1916906833649,
+  23.158218383789062,
+  1923.5474770069122,
+  57.15981888771057,
+  26.148313522338867,
+  343.04822373390,
+  50.433042764663696,
+  1132.0274481773376,
+  4882.973999500275,
+  409.3266043663025,
+  1039.472098827362,
+  1986.157295703888,
+  1510.0389001369476,
+  2339.6396968364716,
+  2338.0884172916412,
+  2698.227762937546
+)
+
+boxplot(
+  bfsTimeExecutions, dfsTimeExecution,
+  main = "Busca em largura vs Busca em profundidade",
+  names = c("Busca em Largura", "Busca em Profundidade"),
+  las = 1
+)
+
+summary(bfsTimeExecutions)
+
+summary(dfsTimeExecution)
+
+sd(bfsTimeExecutions)
+
+sd(dfsTimeExecution)
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
