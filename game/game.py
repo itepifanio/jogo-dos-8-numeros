@@ -1,7 +1,7 @@
 from .eightNumberBoard import EightNumberBoard
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self):
         self.nodeNumber  = 0
         self.visitedList = []
         self.nodeList    = []
@@ -9,6 +9,9 @@ class Game:
         self.board = EightNumberBoard()
         self.startNode = self.board.getBoard()
         self.finalNode = [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
+
+    def getBlankIndexes(self, node):
+        return [[i, n.index(0)] for i, n in enumerate(node) if 0 in n][0]
 
     def printNode(self, node):
         print(node[0][0],node[0][1],node[0][2])

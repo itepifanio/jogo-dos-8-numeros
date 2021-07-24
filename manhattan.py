@@ -41,7 +41,7 @@ class Manhanttan(Game):
                 )
             )
 
-            blankIndex = [[i, n.index(0)] for i, n in enumerate(currentNode) if 0 in n][0]
+            blankIndex = self.getBlankIndexes()
 
             if self.board.canMoveTop(blankIndex):
                 topNode = self.board.top(currentNode, blankIndex[0], blankIndex[1])
@@ -62,7 +62,6 @@ class Manhanttan(Game):
         t1 = time.time()
         print('Time:', t1-t0)
         print('------')    
-
 
 
 if __name__ == '__main__':
