@@ -6,6 +6,7 @@ class EightNumberBoard:
     def __init__(self):
         self.size = 3
         self.board = Board(self.size)
+
         numbers = list(range(0,9))
         
         randomMatrix = []
@@ -15,8 +16,8 @@ class EightNumberBoard:
                 number = choice(numbers)
                 numbers.remove(number)
                 
-                randomMatrix[i].append(number if number != 0 else None)
-    
+                randomMatrix[i].append(number)
+
         self.board.matrix = randomMatrix
 
     def getBoard(self):
@@ -37,28 +38,28 @@ class EightNumberBoard:
     def top(self, node, i, j):
         upNode = copy.deepcopy(node)
         upNode[i][j] = upNode[i-1][j]
-        upNode[i-1][j] = None
+        upNode[i-1][j] = 0
         
         return upNode
 
     def right(self, node, i, j):
         rightNode = copy.deepcopy(node)
         rightNode[i][j] = rightNode[i][j+1]
-        rightNode[i][j+1] = None
+        rightNode[i][j+1] = 0
 
         return rightNode
 
     def left(self, node, i, j):
         leftNode = copy.deepcopy(node)
         leftNode[i][j] = leftNode[i][j-1]
-        leftNode[i][j-1] = None
+        leftNode[i][j-1] = 0
 
         return leftNode
     
     def bottom(self, node, i, j):
         downNode = copy.deepcopy(node)
         downNode[i][j] = downNode[i+1][j]
-        downNode[i+1][j] = None
+        downNode[i+1][j] = 0
 
         return downNode
     
